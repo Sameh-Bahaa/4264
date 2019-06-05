@@ -4,6 +4,7 @@ import SearchInput from '../../components/search-input';
 import SuggestionsList from '../../components/suggestions-list';
 import countryAPI from '../../../api/country';
 import CountryDetails from '../../components/country-details';
+import SearchHistory from '../../components/search-history';
 
 import './search-container.css';
 
@@ -14,12 +15,14 @@ class SearchContainer extends React.Component {
         this.handleOnUserInputChange = this.handleOnUserInputChange.bind(this);
         this.handleOnKeyDownChange = this.handleOnKeyDownChange.bind(this);
         this.handleOnCountrySelected = this.handleOnCountrySelected.bind(this);
+        this.handleDeleteRecord = this.handleDeleteRecord.bind(this);
         this.state = {
             searchResults: [],
             userInput: { name: '' },
             activeSuggestion: 0,
             showSuggestions: false,
-            showDetails: false
+            showDetails: false,
+            historyItems: []
         }
     }
 
@@ -29,9 +32,12 @@ class SearchContainer extends React.Component {
             showSuggestions: true,
             showDetails: false
         });
-
-        const results = this.searchAPIDebounced(userInput);
-        results.then(r => this.setState({ searchResults: r }));
+        if (userInput !== '') {
+            const results = this.searchAPIDebounced(userInput);
+            results.then(r => this.setState({ searchResults: r }));
+        } else {
+            this.setState({ searchResults: [] })
+        }
     }
     handleOnCountrySelected(e) {
         const index = this.state.searchResults.map(e => e.name).indexOf(e.currentTarget.innerText);
@@ -39,7 +45,8 @@ class SearchContainer extends React.Component {
             activeSuggestion: 0,
             showSuggestions: false,
             userInput: this.state.searchResults[index],
-            showDetails: true
+            showDetails: true,
+            historyItems: [...this.state.historyItems, this.state.searchResults[index].name]
         });
     }
     handleOnKeyDownChange(e) {
@@ -49,7 +56,8 @@ class SearchContainer extends React.Component {
                 activeSuggestion: 0,
                 showSuggestions: false,
                 userInput: this.state.searchResults[this.state.activeSuggestion],
-                showDetails: true
+                showDetails: true,
+                historyItems: [...this.state.historyItems, this.state.searchResults[this.state.activeSuggestion].name]
             });
         }
         // User pressed the up arrow
@@ -70,6 +78,12 @@ class SearchContainer extends React.Component {
         }
     }
 
+    handleDeleteRecord(e) {
+        const index = this.state.historyItems.map(e => e).indexOf(e);
+        
+        this.state.historyItems.splice(index, 1)
+        this.setState({historyItems: this.state.historyItems})
+    }
     render() {
         return (
             <div>
@@ -85,7 +99,7 @@ class SearchContainer extends React.Component {
                     </section>
                 </header>
                 <main>
-                    <section>
+                    <section >
                         <summary>
                             <SearchInput
                                 onUserInputChange={this.handleOnUserInputChange}
@@ -101,9 +115,16 @@ class SearchContainer extends React.Component {
                                 onCountrySelected={this.handleOnCountrySelected}>
                             </SuggestionsList>
                         </summary>
-                            <CountryDetails country={this.state.userInput} showDetails={this.state.showDetails}></CountryDetails>
+                        <CountryDetails country={this.state.userInput} showDetails={this.state.showDetails}></CountryDetails>
                     </section>
+                    <aside className='container'>
+                        <SearchHistory
+                            searchHistoryItems={this.state.historyItems}
+                            onDeleteRecord={this.handleDeleteRecord}>
+                        </SearchHistory>
+                    </aside>
                 </main>
+
                 <footer>
                     <p className="mt-5 mb-3 text-muted text-center">&copy; 2018 - 2019</p>
                 </footer>

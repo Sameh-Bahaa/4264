@@ -12,11 +12,11 @@ class CountryDetails extends React.Component {
                     <hr></hr>
                     <h3> {this.props.country.name} Details: </h3>
                     <table className='table table-striped table-active table-bordered' >
-                        <tr>
-                            <th scope="col">Name</th>
-                            <td>{this.props.country.name}</td>
-                        </tr>
                         <tbody>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <td>{this.props.country.name}</td>
+                            </tr>
                             <tr>
                                 <th scope="col">Capital</th>
                                 <td>{this.props.country.capital}</td>
