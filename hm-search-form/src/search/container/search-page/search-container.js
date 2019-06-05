@@ -1,9 +1,9 @@
 import React from 'react';
 import AwesomeDebouncePromise from 'awesome-debounce-promise';
-import SearchInput from '../../components/SearchInput/SearchInput';
-import SuggestionsList from '../../components/SuggestionsList/SuggestionsList';
+import SearchInput from '../../components/search-input';
+import SuggestionsList from '../../components/suggestions-list';
 import countryAPI from '../../../api/country';
-import CountryDetails from '../../components/CountryDetails/country-details';
+import CountryDetails from '../../components/country-details';
 
 import './search-container.css';
 
