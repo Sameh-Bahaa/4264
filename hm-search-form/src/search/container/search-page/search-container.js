@@ -3,6 +3,8 @@ import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import SuggestionsList from '../../components/SuggestionsList/SuggestionsList';
 import countryAPI from '../../../api/country';
+import CountryDetails from '../../components/CountryDetails/country-details';
+
 import './search-container.css';
 
 class SearchContainer extends React.Component {
@@ -14,16 +16,18 @@ class SearchContainer extends React.Component {
         this.handleOnCountrySelected = this.handleOnCountrySelected.bind(this);
         this.state = {
             searchResults: [],
-            userInput: {name: ''},
+            userInput: { name: '' },
             activeSuggestion: 0,
-            showSuggestions: false
+            showSuggestions: false,
+            showDetails: false
         }
     }
 
     handleOnUserInputChange(userInput) {
         this.setState({
             userInput,
-            showSuggestions: true
+            showSuggestions: true,
+            showDetails: false
         });
 
         const results = this.searchAPIDebounced(userInput);
@@ -34,8 +38,8 @@ class SearchContainer extends React.Component {
         this.setState({
             activeSuggestion: 0,
             showSuggestions: false,
-            userInput: this.state.searchResults[index]
-            //userInput: e.currentTarget.innerText
+            userInput: this.state.searchResults[index],
+            showDetails: true
         });
     }
     handleOnKeyDownChange(e) {
@@ -44,7 +48,8 @@ class SearchContainer extends React.Component {
             this.setState({
                 activeSuggestion: 0,
                 showSuggestions: false,
-                userInput: this.state.searchResults[this.state.activeSuggestion]
+                userInput: this.state.searchResults[this.state.activeSuggestion],
+                showDetails: true
             });
         }
         // User pressed the up arrow
@@ -80,8 +85,8 @@ class SearchContainer extends React.Component {
                     </section>
                 </header>
                 <main>
-                    <article>
-                        <section>
+                    <section>
+                        <summary>
                             <SearchInput
                                 onUserInputChange={this.handleOnUserInputChange}
                                 onKeyDownChange={this.handleOnKeyDownChange}
@@ -95,14 +100,14 @@ class SearchContainer extends React.Component {
                                 userInput={this.state.userInput}
                                 onCountrySelected={this.handleOnCountrySelected}>
                             </SuggestionsList>
-                        </section>
-
-                    </article>
+                        </summary>
+                            <CountryDetails country={this.state.userInput} showDetails={this.state.showDetails}></CountryDetails>
+                    </section>
                 </main>
                 <footer>
                     <p className="mt-5 mb-3 text-muted text-center">&copy; 2018 - 2019</p>
                 </footer>
-            </div>
+            </div >
         )
     }
 }
