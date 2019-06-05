@@ -39,53 +39,6 @@ class CountryDetails extends React.Component {
                             </tr>
                         </tbody>
                     </table>
-
-
-                    {/* <table className='table table-active table-bordered' >
-                        <thead className="thead-light">
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">capital</th>
-                                <th scope="col">population</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">
-                                    {this.props.country.name}
-                                </th>
-                                <td>
-                                    {this.props.country.capital}
-                                </td>
-                                <td>
-                                    {this.props.country.population}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <table className='table table-active table-bordered ' >
-                        <thead className="thead-light">
-                            <tr>
-                                <th scope="col">Code</th>
-                                <th scope="col">Native Name</th>
-                                <th scope="col">Calling Code</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    {this.props.country.alpha3Code}
-                                </td>
-                                <td>
-                                    {this.props.country.nativeName}
-                                </td>
-                                <td>
-                                    {this.props.country.callingCodes}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table> */}
                 </article>
             );
         } else {
