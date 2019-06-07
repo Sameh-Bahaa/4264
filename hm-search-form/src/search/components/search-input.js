@@ -41,7 +41,7 @@ class SearchInput extends React.Component {
             placeholder="Type country name ..."
             onChange={e => this.handleTextChange(e.target.value)}
             onKeyDown={this.onKeyDown}
-            value={(this.props.userInput) ? this.props.userInput.name : ''}
+            value={this.props.userInput.name}
             required
             autoFocus></input>
           <label htmlFor="countryName">Country Name</label>

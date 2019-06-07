@@ -48,7 +48,7 @@ class SearchContainer extends React.Component {
             showSuggestions: false,
             userInput: this.state.searchResults[index],
             showDetails: true,
-            historyItems: [...this.state.historyItems, this.state.searchResults[index].name]
+            historyItems: [...this.state.historyItems, {name: this.state.searchResults[index].name, dateModified: new Date()}]
         });
     }
     handleOnKeyDownChange(e) {

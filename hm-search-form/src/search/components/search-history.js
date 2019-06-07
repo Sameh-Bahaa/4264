@@ -28,11 +28,15 @@ class SearchHistory extends React.Component {
                 <ul className="list-group overflow-auto">
                     {this.props.searchHistoryItems.map((item, index) => {
                         return (
-                            <li className='list-group-item clearfix' key={item}>
-                                {item}
+                            <li className='list-group-item clearfix' key={item.name}>
+                                {item.name}
+                                <time className="badge badge-info ml-md-2">
+                                    {item.dateModified.toLocaleTimeString("sv-SE")}
+                                </time>
                                 <span className="float-right button-group">
                                     <button type="button" className="del-btn" onClick={() => this.onDeleteRecord(item)}></button>
                                 </span>
+
                             </li>
                         );
                     })}
