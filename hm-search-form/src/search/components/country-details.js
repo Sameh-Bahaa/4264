@@ -9,8 +9,11 @@ class CountryDetails extends React.Component {
         if (this.props.showDetails) {
             return (
                 <article>
-                    <hr></hr>
-                    <h3> {this.props.country.name} Details: </h3>
+                    <section >
+                        <hr></hr>
+                        <h5> {this.props.country.name} Details: </h5>
+                        <hr></hr>
+                    </section>
                     <table className='table table-striped table-active table-bordered' >
                         <tbody>
                             <tr>
