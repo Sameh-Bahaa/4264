@@ -12,14 +12,18 @@ class SearchInput extends React.Component {
     userInput: ''
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: this.props.userInput.name
+    };
     this.handleTextChange = this.handleTextChange.bind(this);
   }
 
 
   handleTextChange = async userInput => {
     this.props.onUserInputChange(userInput);
+    this.setState({ inputValue: userInput });
   };
 
   onClick = e => {
@@ -34,18 +38,18 @@ class SearchInput extends React.Component {
   render() {
 
     return (
-        <div className="form-label-group">
-          <input type="text"
-            id="countryName"
-            className="form-control"
-            placeholder="Type country name ..."
-            onChange={e => this.handleTextChange(e.target.value)}
-            onKeyDown={this.onKeyDown}
-            value={this.props.userInput.name}
-            required
-            autoFocus></input>
-          <label htmlFor="countryName">Country Name</label>
-        </div>
+      <div className="form-label-group">
+        <input type="text"
+          id="countryName"
+          className="form-control"
+          placeholder="Type country name ..."
+          onChange={e => this.handleTextChange(e.target.value)}
+          onKeyDown={this.onKeyDown}
+          value={this.state.inputValue}
+          required
+          autoFocus></input>
+        <label htmlFor="countryName">Country Name</label>
+      </div>
     );
   }
 }

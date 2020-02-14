@@ -1,9 +1,6 @@
 import React from 'react'
 
 class CountryDetails extends React.Component {
-    constructor() {
-        super();
-    }
 
     render() {
         if (this.props.showDetails) {
